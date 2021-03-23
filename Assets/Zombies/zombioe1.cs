@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -55,7 +55,7 @@ public class ZombieController : MonoBehaviour
         {
             case STATE.IDLE:
                 if (CanSeePlayer()) state = STATE.CHASE;
-                else if (Random.Range(0, 5000) < 5)
+                else if(Random.Range(0,5000) < 5)
                     state = STATE.WANDER;
                 break;
             case STATE.WANDER:
@@ -96,12 +96,12 @@ public class ZombieController : MonoBehaviour
                     state = STATE.WANDER;
                     agent.ResetPath();
                 }
+
                 break;
             case STATE.ATTACK:
                 TurnOffTriggers();
                 anim.SetBool("isAttacking", true);
-                this.transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-                //this.transform.LookAt(target.transform.position);
+                this.transform.LookAt(target.transform.position);
                 if (DistanceToPlayer() > agent.stoppingDistance + 2)
                     state = STATE.CHASE;
                 break;
@@ -110,3 +110,4 @@ public class ZombieController : MonoBehaviour
         }
     }
 }
+*/
