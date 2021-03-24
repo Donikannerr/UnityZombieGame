@@ -51,6 +51,11 @@ public class ZombieController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (target == null)
+    {
+      target = GameObject.FindWithTag("Player");
+      return;
+    }
     switch (state)
     {
       case STATE.IDLE:
