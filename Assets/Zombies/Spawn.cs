@@ -36,7 +36,7 @@ public class Spawn : MonoBehaviour
 
   void OnTriggerEnter(Collider collider)
   {
-    if (!SpawnOnStart)
+    if (!SpawnOnStart && collider.gameObject.tag == "Player")
     {
       SpawnAll();
     }
