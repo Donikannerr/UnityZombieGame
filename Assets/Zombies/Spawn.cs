@@ -8,9 +8,17 @@ public class Spawn : MonoBehaviour
   public GameObject zombiePrefab;
   public int number;
   public float spawnRadius;
+  public bool SpawnOnStart = true;
 
   void Start()
   {
+    if (SpawnOnStart)
+      SpawnAll();
+  }
+
+  void SpawnAll()
+  {
+
     for (int i = 0; i < number; i++)
     {
       Vector3 randomPoint = this.transform.position + Random.insideUnitSphere * spawnRadius;
@@ -26,9 +34,15 @@ public class Spawn : MonoBehaviour
     }
   }
 
-  // Update is called once per frame
-  void Update()
+  void OnTriggerEnter(Collider collider)
   {
+    if (!SpawnOnStart)
+    {
+      SpawnAll();
+    }
+
 
   }
+
 }
+
