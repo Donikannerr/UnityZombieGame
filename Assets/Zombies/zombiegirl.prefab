@@ -2240,6 +2240,7 @@ MonoBehaviour:
   target: {fileID: 0}
   walkingSpeed: 1
   runningSpeed: 1.8
+  ragdoll: {fileID: 3435945833061815944, guid: 1aa1d18513a19da47a616850d381e9be, type: 3}
 --- !u!54 &218005753
 Rigidbody:
   m_ObjectHideFlags: 0

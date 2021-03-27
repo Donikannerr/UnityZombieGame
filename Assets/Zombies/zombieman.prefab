@@ -1777,6 +1777,7 @@ MonoBehaviour:
   target: {fileID: 0}
   walkingSpeed: 1
   runningSpeed: 1.5
+  ragdoll: {fileID: 3030096127314462542, guid: 1e2321b3f7aa3a94f923715c111c8a58, type: 3}
 --- !u!195 &1611734474
 NavMeshAgent:
   m_ObjectHideFlags: 0

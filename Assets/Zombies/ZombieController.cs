@@ -10,6 +10,7 @@ public class ZombieController : MonoBehaviour
   public float runningSpeed;
   Animator anim;
   NavMeshAgent agent;
+  public GameObject ragdoll;
 
   enum STATE { IDLE, WANDER, ATTACK, CHASE, DEAD };
   STATE state = STATE.IDLE;
@@ -51,6 +52,17 @@ public class ZombieController : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (Input.GetKeyDown(KeyCode.P))
+    {
+      GameObject rd = Instantiate(ragdoll, this.transform.position, this.transform.rotation);
+      rd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
+      if (rd.transform.Find("Zombie:Hips") == true)
+      {
+        rd.transform.Find("Zombie:Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
+      }
+      Destroy(this.gameObject);
+      return;
+    }
     if (target == null)
     {
       target = GameObject.FindWithTag("Player");
