@@ -5,6 +5,7 @@ using UnityEngine;
 public class FPController : MonoBehaviour
 {
   public GameObject cam;
+  public Transform shotDirection;
 
   public Animator anim;
 
@@ -35,11 +36,11 @@ public class FPController : MonoBehaviour
 
   //Inventory
 
-  int ammo = 0;
+  int ammo = 50;
   int maxAmmo = 50;
   int health = 0;
   int maxHealth = 100;
-  int ammoClip = 0;
+  int ammoClip = 10;
   int ammoClipMax = 10;
 
   bool playingWalking = false;
@@ -61,6 +62,35 @@ public class FPController : MonoBehaviour
     health = maxHealth;
   }
 
+  //Raycast --> wenn wir Zombie treffen, dann mach etwas
+  void ProcessZombieHit()
+  {
+    // Wenn Der Strahl(UnserWürfel.Richtungen, Nur die Vorwärtsrichtung, WAS WURDE GETROFFEN, wie weit geht unser strahl) irgendetwas getroffen hat.
+    RaycastHit hitInfo;
+    if (Physics.Raycast(shotDirection.position, shotDirection.forward, out hitInfo, 200))
+    { // Hier bekommen wir den Collider, der von unserem Raycast getroffen wurde
+      GameObject hitZombie = hitInfo.collider.gameObject;
+      if (hitZombie.tag == "Zombie")
+      {
+        if (Random.Range(0, 10) < 5)
+        {
+          // Vom getroffenen Zombie die ragdoll prob erhalten
+          GameObject rdPrefab = hitZombie.GetComponent<ZombieController>().ragdoll;
+          // an der stelle des getroffenen zombies möchten wir eine ragdoll platzieren
+          GameObject newRD = Instantiate(rdPrefab, hitZombie.transform.position, Quaternion.Euler(hitZombie.transform.position));
+          newRD.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(shotDirection.forward * 10000);
+          Destroy(hitZombie);
+        }
+        else
+        {
+          //Greif auf die Klasse ZombieController zu und rufe die funktion turnofftriggers auf!
+          hitZombie.GetComponent<ZombieController>().TurnOffTriggers();
+        }
+
+      }
+    }
+  }
+
   // Update is called once per frame
   void Update()
   {
@@ -72,10 +102,11 @@ public class FPController : MonoBehaviour
       if (ammoClip > 0)
       {
         anim.SetTrigger("fire");
+        ProcessZombieHit();
         ammoClip--;
       }
       else if (anim.GetBool("arm"))
-         trigger.Play();
+        trigger.Play();
 
       Debug.Log("Ammo left in Clip " + ammoClip);
 

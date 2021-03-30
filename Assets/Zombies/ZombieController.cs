@@ -22,7 +22,7 @@ public class ZombieController : MonoBehaviour
     agent = this.GetComponent<NavMeshAgent>();
   }
 
-  void TurnOffTriggers()
+  public void TurnOffTriggers()
   {
     anim.SetBool("isWalking", false);
     anim.SetBool("isAttacking", false);
@@ -49,10 +49,17 @@ public class ZombieController : MonoBehaviour
     return false;
   }
 
+  public void KillZombie()
+  {
+    TurnOffTriggers();
+    anim.SetBool("isDead", true);
+    state = STATE.DEAD;
+  }
+
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.P))
+    /*if (Input.GetKeyDown(KeyCode.P))
     {
       GameObject rd = Instantiate(ragdoll, this.transform.position, this.transform.rotation);
       rd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
@@ -62,7 +69,7 @@ public class ZombieController : MonoBehaviour
       }
       Destroy(this.gameObject);
       return;
-    }
+    }*/
     if (target == null)
     {
       target = GameObject.FindWithTag("Player");

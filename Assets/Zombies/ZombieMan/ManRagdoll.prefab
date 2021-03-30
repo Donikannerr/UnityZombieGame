@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 2041900326441416029}
   - component: {fileID: 8276571883573336103}
   m_Layer: 0
-  m_Name: zombie
+  m_Name: ManRagdoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2803,7 +2803,7 @@ GameObject:
   - component: {fileID: 5079480691643157059}
   - component: {fileID: 4539241218317507703}
   m_Layer: 0
-  m_Name: Zombie:Hips
+  m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
